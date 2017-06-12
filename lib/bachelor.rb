@@ -43,17 +43,46 @@ def get_first_name_of_season_winner(data, season)
 end
 
 def get_contestant_name(data, occupation)
-  # code here
+  data.each do |season, contenstant_data_array|
+    contenstant_data_array.each do  |contestant_data|
+      if contestant_data["occupation"] == occupation
+        return contestant_data["name"]
+      end
+    end
+  end
 end
 
 def count_contestants_by_hometown(data, hometown)
-  # code here
+  count = 0
+  data.each do |season, contenstant_data_array|
+    contenstant_data_array.each do  |contestant_data|
+      if contestant_data["hometown"] == hometown
+        count += 1
+      end
+    end
+  end
+  count
 end
 
 def get_occupation(data, hometown)
-  # code here
+  data.each do |season, contenstant_data_array|
+    contenstant_data_array.each do  |contestant_data|
+      if contestant_data["hometown"] == hometown
+        return contestant_data["occupation"]
+      end
+    end
+  end
 end
 
 def get_average_age_for_season(data, season)
-  # code here
+  age_array = []
+  average_age = 0
+  data[season].each do |contenstant|
+    age_array << contenstant['age']
+  end
+  age_array
+  age_array.each do |age|
+    average_age += age.to_f
+  end
+  (average_age / age_array.count).round
 end
